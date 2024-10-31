@@ -1,0 +1,10 @@
+{
+  "name": "rentsyst/wp-booking-widget",
+  "description": "Wp plugin for easy integration with rentsyst.com",
+  "require": {
+    "php": ">=7.1"
+  },
+  "autoload" : {
+    "psr-4": {"rentsyst\\": "\\"}
+  }
+}

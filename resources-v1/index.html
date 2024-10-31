@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+	<title>Rentsyst constructor</title>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.rentsyst.com/static/icons/font-icons.css">
+	<link rel="preconnect" href="https://cdn.rentsyst.com" crossorigin>
+	<link href="css/swiper.css" rel="stylesheet">
+	<link href="/static/css/2.chunk.css" rel="stylesheet">
+	<style>
+		body {
+			margin: 0;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			font-family: Roboto, sans-serif;
+			line-height: 1;
+			position: relative
+		}
+	</style>
+	<script>
+		document.addEventListener("rentsyst:search", function (event) {
+			console.log("Search event fired", event.detail);
+		});
+		document.addEventListener("rentsyst:book", function (event) {
+			console.log("Book vehicle event fired", event.detail);
+		});
+		document.addEventListener("rentsyst:order_confirm", function (event) {
+			console.log("Confirm order event fired", event.detail);
+		});
+	</script>
+	<script>
+		window.rentsyst_settings = {
+			lang: "en",
+			accessToken: "f890d5da8e616cde78a1d98608c2d28d58699c5c",
+			updateToken: true,
+			urls: {
+				updateToken: {
+					link: "http://localhost:5000/update-token",
+				},
+				disableDates: {
+					link: "http://localhost:5000/disable-dates",
+				},
+				getWorkTimes: {
+					link: "http://localhost:5000/locations/",
+				},
+				bookOrder: {
+					link: "http://localhost:5000/book-search"
+				},
+				createOrder: {
+					link: "http://localhost:5000/create-order",
+					params: {
+						back: "test",
+						test2: "val2"
+					}
+				},
+				updateOrder: {
+					link: "http://localhost:5000/update-order"
+				},
+				updateCoupon: {
+					link: "http://localhost:5000/update-order"
+				},
+				updatePayment: {
+					link: "http://localhost:5000/update-order"
+				},
+				getPass: {
+					link: "http://localhost:5000/get-pass",
+					params: {
+						parem: "lol",
+						parem2: "lol2"
+					}
+				},
+				getDriver: {
+					link: "http://localhost:5000/get-driver",
+					params: {
+						parem: "lol",
+						parem2: "lol2"
+					}
+				},
+				orderConfirm: {
+					link: "http://localhost:5000/order-confirm"
+				},
+				orderCancel: {
+					link: "http://localhost:5000/order-cancel"
+				},
+				setApp: {
+					link: "http://localhost:5000/set-app",
+					params: {
+						back: "val",
+						back2: "val2"
+					}
+				},
+				updateTime: {
+					link: "http://localhost:5000/update-time",
+				}
+			},
+			isFilters: true,
+			filters: {
+				page: 1,
+				per_page: {
+					value: 3,
+					values: [3, 6, 9, 12, 15]
+				},
+				sort: {
+					values: [
+						{ value: "price", label: "Sort by Price" },
+						{ value: "type", label: "Sort by Type" }
+					]
+				},
+				aside: {
+					price: {
+						fixed: {},
+						disabled: false,
+						title: "Price%20per%20day",
+						type: "range",
+						values: {
+							min: 70,
+							max: 250
+						}
+					},
+					year: {
+						fixed: ["2020", "2020"],
+						disabled: false,
+						title: "Year",
+						type: "multiple",
+						values: {
+							2020: "2020",
+							2018: "2018"
+						}
+					},
+					number_seats: {
+						fixed: [],
+						disabled: false,
+						title: "Number%20of%20seats",
+						type: "multiple",
+						values: {
+							"10": "10",
+							"5": "5"
+						}
+					},
+					number_doors: {
+						fixed: [],
+						disabled: false,
+						title: "Number%20of%20doors",
+						type: "multiple",
+						values: {
+							"6": "6",
+							"5": "5"
+						}
+					},
+					colors: {
+						fixed: [],
+						disabled: false,
+						title: "Colors",
+						type: "color",
+						values: {
+							"15": "red",
+							"16": "#00ff00",
+							"17": "#0000ff"
+						}
+					}
+				}
+			},
+			locations: [
+				{ id: 59, name: "Larnaca Airport" },
+				{ id: 60, name: "Larnaca Office" },
+				{ id: 61, name: "Larnaca Airport" }
+			],
+			payment_method: [
+				{
+					name: "Card",
+					icon: "https://rentsyst.com/assets/623a908c/img/VisaMaster.svg",
+					type: "icon",
+					id: "card",
+					discount: {
+						name: "discount 10%"
+					}
+				},
+				{
+					name: "Cash",
+					text: "€",
+					type: "text",
+					id: "cash",
+				},
+				{
+					name: "Electronic money",
+					icon: "https://rentsyst.com/assets/623a908c/img/svg/paydunya.svg",
+					type: "icon",
+					discount: {
+						name: "discount 20%"
+					}
+				},
+				{
+					name: "Bank transfer",
+					icon: "https://rentsyst.com/assets/623a908c/img/Bank.svg",
+					type: "icon",
+				}
+			],
+			rental_days: {
+				from: 0,
+				to: 60
+			},
+			hours_before_rental: 2,
+			date_format: "dd/MM/yyyy HH:mm",
+			price_format: "{currency}&nbsp;{price}",
+			driver_age: {
+				from: 25,
+				to: 60
+			},
+			steps: [
+				{
+					view: "horizontal",
+					views: ["vertical", "horizontal"],
+					allowed: true
+				},
+				{
+					view: "vertical",
+					views: ["vertical", "horizontal"],
+					allowed: true
+				},
+				{
+					view: "cube",
+					views: ["vertical", "horizontal", "cube"],
+					allowed: true
+				},
+				{
+					view: "cube",
+					views: ["vertical", "horizontal", "cube"],
+					allowed: true
+				},
+			],
+			font: "Poppins,sans-serif",
+			font_families: [
+				{ value: "montserrat,sans-serif", label: "Montserrat" },
+			],
+			vehicle_params: [
+				{ key: "transmission", textKey: "transmission", icon: "fico fico-engine" },
+				{
+					key: "large_bags",
+					textKey: "big_luggage",
+					icon: "fico fico-profile",
+				},
+				{
+					key: "number_seats",
+					textKey: "adults",
+					icon: "fico fico-driver",
+				},
+				{
+					key: "mileage_limit",
+					textKey: "mileage_limit",
+					icon: "fico fico-gauge",
+				},
+				{
+					key: "refill",
+					textKey: "refill",
+					icon: "fico fico-gas-station2",
+				},
+			],
+			withCoupon: true,
+			tabs: true,
+			tabsColors: {
+				value: "#959595",
+				active: "#000000"
+			},
+			colorMain: {
+				custom: false,
+				value: "#ff0000"
+			},
+			colorSecond: {
+				custom: false,
+				value: "#696969"
+			},
+			textColor: {
+				custom: false,
+				value: "#000000"
+			},
+			bgColor: {
+				custom: false,
+				value: "#FFFFFF"
+				// value: "#18191b"
+			},
+			loaderColor: {
+				custom: false,
+				value: "#000000"
+			},
+			blockTypes: {
+				vehicle_list: 0,
+				extras: 0,
+				summary: 0
+			},
+			icons: true,
+			disabledBlocks: [],
+			blocksPadding: {},
+			text: {
+				//header
+				"header_text": "%3Cp%3E%3Cspan%20style=%22font-size:38px%22%3E%3Cstrong%3EBuild%20Your%20Service!%3C/strong%3E%3C/span%3E%3C/p%3E%3Cbr/%3E%3Cp%3E%3Cspan%20style=%22font-size:20px%22%3E4%20easy%20steps%20to%20success!%3C/span%3E%3C/p%3E",
+				"time_left": "Time%20left:",
+				//time out popup
+				"time_over_text": "%3Cp%3E%3Cspan%20style=%22font-size:32px%22%3E%3Cstrong%3EBooking%20time%20has%20ended%3C/strong%3E%3C/span%3E%3C/p%3E%3Cbr/%3E%3Cp%3E%3Cspan%20style=%22font-size:20px%22%3EStart%20over%3C/span%3E%3C/p%3E",
+				"time_over_button": "Start",
+				//time is running out popup
+				"time_left_text": "%3Cp%3E%3Cspan%20style=%22font-size:32px%22%3E%3Cstrong%3EAre%20you%20still%20here?%3C/strong%3E%3C/span%3E%3C/p%3E",
+				"time_left_button": "Yes",
+				//tabs buttons
+				"tab_prev_btn": "%3Cstrong%3EPrev%3C/strong%3E",
+				"tab_next_btn": "%3Cstrong%3ENext%3C/strong%3E",
+				//step 1
+				"location_label_pick": "%3Cstrong%3EPick%20Up%3C/strong%3E",
+				"location_label_return": "%3Cstrong%3EReturn%3C/strong%3E",
+				"location_placeholder_pick": "Choose%20location",
+				"location_placeholder_return": "Choose%20location",
+				"location_gm_btn": "Goodle%20Maps",
+				"location_check_return": "I%20want%20to%20return%20to%20different%20location",
+				"date_from_label": "%3Cstrong%3EDate%20From%3C/strong%3E",
+				"date_from_placeholder": "Select%20date%20from",
+				"date_to_label": "%3Cstrong%3EDate%20To%3C/strong%3E",
+				"date_to_placeholder": "Select%20date%20to",
+				"show_car_btn": "%3Cstrong%3EShow%20car%3C/strong%3E",
+				//step 2
+				"transmission": "Transmission:",
+				"big_luggage": "Big luggage:",
+				"adults": "Adults:",
+				"doors": "Doors:",
+				"mileage_limit": "Mileage limit:",
+				"refill": "Refill:",
+				"book_btn": "%3Cstrong%3EBook%3C/strong%3E",
+				"filters_title": "Filters",
+				"submit_filters": "%3Cstrong%3ESubmit%3C/strong%3E",
+				"reset_filters": "%3Cstrong%3EReset%3C/strong%3E",
+				"sort_select_placeholder": "Choose%20sort",
+				"pagination_showing": "Showing",
+				"pagination_of": "of",
+				"results_found": "Results%20Found",
+				"vehicle_days_total": "Total%20for",
+				"vehicle_days_days": "days",
+				"vehicle_price_total": "Total:",
+				"vehicle_days_horizontal": "Number of days:",
+				//step 3
+				"extas_title": "Extras",
+				"extras_subtitle_equipment": "%3Cstrong%3EEquipment%20and%20services%3C/strong%3E",
+				"extras_subtitle_insurence": "%3Cstrong%3EInsurance%3C/strong%3E",
+				"continue_btn": "%3Cstrong%3EContinue%3C/strong%3E",
+				"security_deposit": "SECURITY%20DEPOSIT",
+				"damage_excess": "DAMAGE%20EXCESS",
+				"extras_price_day": "/%20day",
+				"insurance_price_day": "/%20day",
+				//step 4
+				"customer_title": "Customer",
+				"head_driver": "%3Cstrong%3EHead%20driver%3C/strong%3E",
+				"advansed_driver": "%3Cstrong%3EAdvanced%20driver%3C/strong%3E",
+				"driver_license": "%3Cstrong%3EDrive%20licence%3C/strong%3E",
+				"additional_info": "%3Cstrong%3EAdditional%20information%3C/strong%3E",
+				"payment_subtitle": "%3Cstrong%3EPayment%3C/strong%3E",
+				"confirm_btn": "%3Cstrong%3EConfirm%3C/strong%3E",
+				"required_text": "*%20-%20Required%20fields",
+				"form_first_name": "First%20Name",
+				"form_last_name": "Second%20Name",
+				"form_email": "E-mail",
+				"form_password": "Password",
+				"form_password_send": "Send%20&rarr;",
+				"form_phone": "Phone%20number",
+				"form_country": "Country",
+				"form_city": "City",
+				"form_address": "Address",
+				"form_birthday": "Date%20of%20birthday",
+				"form_license_num": "Document%20number",
+				"form_license_from": "Issue%20date",
+				"form_license_to": "Exp%20date",
+				"form_email_reg": "Если%20ваш%20E-mail%20уже%20есть%20в%20базе,%20это%20ускорит%20процесс%20регистрации",
+				"form_code_send": "Код%20был%20отрпавлен%20на%20E-mail:",
+				"form_code_not_received": "Не%20дошел%20код?",
+				"form_try_again": "%3Cstrong%3E%3Cspan%20style=%22text-decoration:underline%22%3EПопробуйте%20еще%20раз%3C/span%3E%3C/strong%3E",
+				"form_try_over": "через",
+				"form_try_seconds": "секунд.",
+				"license_files": "%3Cstrong%3EUpload%20licence%3C/strong%3E",
+				"add_driver_btn": "%3Cstrong%3EAdd%20new%20driver%3C/strong%3E",
+				"accept_link": "I%20accept%20the%20Privacy%20Policy",
+				"coupon_title": "%3Cstrong%3ECoupon%3C/strong%3E",
+				"coupon_activate": "Add coupon",
+				"apply_coupon": "Apply",
+				//summary
+				"summary_title": "Summary",
+				"summary_label_date_from": "%3Cstrong%3EPick%20Up:%3C/strong%3E",
+				"summary_label_location_from": "%3Cstrong%3ELocation:%3C/strong%3E",
+				"summary_label_date_to": "%3Cstrong%3EReturn:%3C/strong%3E",
+				"summary_label_location_to": "%3Cstrong%3ELocation:%3C/strong%3E",
+				"summary_edit_btn": "%3Cstrong%3EChange%3C/strong%3E",
+				"summary_subtitle_extras": "%3Cstrong%3EExtras%3C/strong%3E",
+				"summary_subtitle_taxes": "%3Cstrong%3ETaxes%3C/strong%3E",
+				"summary_subtitle_delivery": "%3Cstrong%3EDelivery%3C/strong%3E",
+				"summary_subtitle_coupon": "%3Cstrong%3ECoupon%3C/strong%3E",
+				"summary_subtitle_discount": "%3Cstrong%3EDiscount%3C/strong%3E",
+				"summary_subtitle_total": "%3Cstrong%3ETotal%3C/strong%3E",
+				"summary_security_deposit": "Security%20deposit:",
+				"summary_damage_excess": "Damage%20excess:",
+				"summary_total_tax": "Total",
+				"summary_rental_days_type_left": "Rental%20period",
+				"summary_rental_days_type_right": "days",
+			},
+			textStyles: {
+				"summary_rental_days_type1": "font-weight:bold",
+				"form_send_email": "font-weight:bold"
+			},
+			license: true,
+			driverForm: {
+				main_fields: [
+					[
+						{
+							name: "email",
+							type: "email",
+							placeholder: "E-mail",
+							required: true
+						},
+						{
+							name: "code",
+							type: "text",
+							placeholder: "Code",
+							required: false
+						}
+					],
+					[
+						{
+							name: "first_name",
+							type: "text",
+							placeholder: "First Name",
+							required: true
+						},
+						{
+							name: "last_name",
+							type: "text",
+							placeholder: "Second Name",
+							required: true
+						}
+					],
+					[
+						{
+							name: "phone",
+							type: "tel",
+							placeholder: "Phone number",
+							required: true
+						},
+						{
+							name: "country",
+							type: "text",
+							placeholder: "Country",
+							required: true
+						},
+					],
+					[
+						{
+							name: "city",
+							type: "text",
+							placeholder: "City",
+							required: true
+						},
+						{
+							name: "address",
+							type: "text",
+							placeholder: "Address",
+							required: true
+						},
+					],
+					[
+						{
+							name: "birthday",
+							type: "picker",
+							placeholder: "Date of birthday",
+							required: true
+						}
+					]
+				],
+				license_fields: [
+					[
+						{
+							name: "license_num",
+							type: "text",
+							placeholder: "Document number",
+							required: true
+						}
+					],
+					[
+						{
+							name: "license_from",
+							type: "picker",
+							icon: "calendar",
+							placeholder: "Issue date",
+							required: true
+						},
+						{
+							name: "license_to",
+							type: "picker",
+							icon: "calendar",
+							placeholder: "Exp date",
+							required: true
+						}
+					],
+					[
+						{
+							name: "license_files",
+							type: "file",
+						}
+					]
+				],
+			},
+			return_urls: {
+				param1: "val1",
+				param2: "val2"
+			},
+			accepted: {
+				status: false,
+				link: "http://accept.com"
+			},
+			canDiffReturn: true,
+			baseLocations: false,
+			orderTime: 600000, //ms
+			orderUpdateTime: 10000, //ms
+			onResize: function (width, height) {
+				console.log(width, height);
+			},
+			onAutoScroll: function (scrollVal) {
+				console.log(scrollVal);
+			}
+		};
+	</script>
+</head>
+
+<body>
+	<noscript>You need to enable JavaScript to run this app.</noscript>
+	<div id="rentsyst_frame"></div>
+
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBinmfAS11SOAd1qlLQWDSRAvMJWwKM98&libraries=places"></script>
+	<script src="/tinymce/tinymce.min.js"></script>
+
+	<script src="/static/js/bundle_admin_.js"></script>
+	<!--<script src="/static/js/bundle_front.js"></script>-->
+
+	<script>
+		RentsystFrame.init({
+			container: document.getElementById("rentsyst_frame"),
+			settings: window.rentsyst_settings,
+			onResize: function (width, height) {
+			},
+			onAutoScroll: function (scrollVal) {
+			}
+		});
+	</script>
+</body>
+
+</html>

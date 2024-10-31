@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+	<title>Rentsyst payment</title>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+		rel="stylesheet">
+	<link rel="preconnect" href="https://cdn.rentsyst.com" crossorigin>
+	<link rel="stylesheet" href="https://cdn.rentsyst.com/static/icons/font-icons.css">
+	<style>
+		body {
+			margin: 0;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			font-family: Roboto, sans-serif;
+			line-height: 1;
+			position: relative
+		}
+	</style>
+	<script>
+		window.installs = {
+			lang: "en",
+			accessToken: "O4_AAYoiuPrsk_k53Mncmpa58HSqFVIv",
+			urls: {
+				disableDates: {
+					link: "http://localhost:5001/disable-dates",
+				},
+				bookOrder: {
+					link: "http://localhost:5001/book-search"
+				},
+				createOrder: {
+					link: "http://localhost:5001/create-order",
+					params: {
+						back: "test",
+						test2: "val2"
+					}
+				},
+				updateOrder: {
+					link: "http://localhost:5001/update-order"
+				},
+				orderConfirm: {
+					link: "http://localhost:5001/order-confirm"
+				},
+				setApp: {
+					link: "http://localhost:5001/set-app",
+					params: {
+						back: "val",
+						back2: "val2"
+					}
+				},
+				getOrder: {
+					link: "http://localhost:5001/get-order"
+				}
+			},
+			isFilters: true,
+			filters: {
+				sort: [
+					{ value: "price", label: "Sort by Price" },
+					{ value: "type", label: "Sort by Type" }
+				],
+				price: {
+					min: 70,
+					max: 250
+				},
+				year: ["2020", "2018", "2017", "2015", "2013", "2011", "2010", "2009"],
+				number_seats: ["10", "5", "4", "2"],
+				number_doors: ["6", "5", "4", "2"]
+			},
+			locations: [
+				{ id: 151, name: "Larnaca Office" },
+				{ id: 152, name: "Limassol Office" },
+				{ id: 153, name: "Paphos Office" }
+			],
+			payment_method: [
+				{
+					name: "Card",
+					icon: "/img/VisaMaster.svg"
+				},
+				{
+					name: "Cash",
+					icon: "/img/cash.png"
+				},
+				{
+					name: "Electronic money",
+					icon: "/img/PayPal.svg"
+				},
+				{
+					name: "Bank transfer",
+					icon: "/img/Bank.svg"
+				}
+			],
+			steps: [
+				{
+					view: "vertical",
+					views: ["vertical", "horizontal"],
+					allowed: true
+				},
+				{
+					view: "vertical",
+					views: ["vertical", "horizontal"],
+					allowed: true
+				},
+				{
+					view: "cube",
+					views: ["vertical", "horizontal", "cube"],
+					allowed: true
+				},
+				{
+					view: "cube",
+					views: ["vertical", "horizontal", "cube"],
+					allowed: true
+				},
+			],
+			font: "Poppins,sans-serif",
+			tabs: true,
+			tabsColors: {
+				value: "#959595",
+				active: "#000000"
+			},
+			colorMain: {
+				custom: false,
+				value: "#000000"
+			},
+			colorSecond: {
+				custom: false,
+				value: "#696969"
+			},
+			textColor: {
+				custom: false,
+				value: "#000000"
+			},
+			bgColor: {
+				custom: false,
+				value: "#FFFFFF"
+			},
+			loaderColor: {
+				custom: false,
+				value: "#000000"
+			},
+			blockTypes: {
+				vehicle_list: 0,
+				extras: 0,
+				summary: 0
+			},
+			icons: true,
+			disabledBlocks: [],
+			blocksPadding: {},
+			text: {
+				//header
+				"header_text": "%3Cp%3E%3Cspan%20style=%22font-size:38px%22%3E%3Cstrong%3EBuild%20Your%20Service!%3C/strong%3E%3C/span%3E%3C/p%3E%3Cbr/%3E%3Cp%3E%3Cspan%20style=%22font-size:20px%22%3E4%20easy%20steps%20to%20success!%3C/span%3E%3C/p%3E",
+				//tabs buttons
+				"tab_prev_btn": "%3Cstrong%3EPrev%3C/strong%3E",
+				"tab_next_btn": "%3Cstrong%3ENext%3C/strong%3E",
+				//step 1
+				"location_label_pick": "%3Cstrong%3EPick%20Up%3C/strong%3E",
+				"location_label_return": "%3Cstrong%3EReturn%3C/strong%3E",
+				"location_placeholder_pick": "Choose%20loction",
+				"location_placeholder_return": "Choose%20loction",
+				"location_switcher_base": "Base%20location",
+				"location_switcher_map": "Location%20on%20the%20map",
+				"location_check_return": "Return%20to%20the%20same%20location",
+				"date_label": "%3Cstrong%3EDates%3C/strong%3E",
+				"date_placeholder": "Select%20dates%20and%20time",
+				"show_car_btn": "%3Cstrong%3EShow%20car%3C/strong%3E",
+				//step 2
+				"book_btn": "%3Cstrong%3EBook%3C/strong%3E",
+				"filters_title": "Filters",
+				"filter_price_title": "Price%20per%20day",
+				"filter_year_title": "Year",
+				"filter_number_seats_title": "Number%20of%20seats",
+				"filter_number_doors_title": "Number%20of%20doors",
+				"submit_filters": "%3Cstrong%3ESubmit%3C/strong%3E",
+				"reset_filters": "%3Cstrong%3EReset%3C/strong%3E",
+				//step 3
+				"extas_title": "Extras",
+				"extras_subtitle_equipment": "%3Cstrong%3EEquipment%20and%20services%3C/strong%3E",
+				"extras_subtitle_insurence": "%3Cstrong%3EInsurance%3C/strong%3E",
+				"continue_btn": "%3Cstrong%3EContinue%3C/strong%3E",
+				//step 4
+				"customer_title": "Customer",
+				"head_driver": "%3Cstrong%3EHead%20driver%3C/strong%3E",
+				"advansed_driver": "%3Cstrong%3EAdvanced%20driver%3C/strong%3E",
+				"driver_license": "%3Cstrong%3EDrive%20licence%3C/strong%3E",
+				"license_files": "%3Cstrong%3EUpload%20licence%3C/strong%3E",
+				"add_driver_btn": "%3Cstrong%3EAdd%20new%20driver%3C/strong%3E",
+				"payment_subtitle": "%3Cstrong%3EPayment%3C/strong%3E",
+				"confirm_btn": "%3Cstrong%3EConfirm%3C/strong%3E",
+				//summary
+				"summary_title": "Summary",
+				"summary_label_date_from": "%3Cstrong%3EPick%20Up:%3C/strong%3E",
+				"summary_label_location_from": "%3Cstrong%3ELocation:%3C/strong%3E",
+				"summary_label_date_to": "%3Cstrong%3EReturn:%3C/strong%3E",
+				"summary_label_location_to": "%3Cstrong%3ELocation:%3C/strong%3E",
+				"summary_edit_btn": "%3Cstrong%3EChange%3C/strong%3E",
+				"summary_subtitle_extras": "%3Cstrong%3EExtras%3C/strong%3E",
+				"summary_subtitle_taxes": "%3Cstrong%3ETaxes%3C/strong%3E",
+				"summary_subtitle_delivery": "%3Cstrong%3EDelivery%3C/strong%3E",
+				"summary_subtitle_coupon": "%3Cstrong%3ECoupon%3C/strong%3E",
+				"summary_subtitle_discount": "%3Cstrong%3EDiscount%3C/strong%3E",
+				"summary_subtitle_total": "%3Cstrong%3ETotal%3C/strong%3E",
+				"summary_subtitle_driver": "%3Cstrong%3EDriver%3C/strong%3E",
+				"summary_security_deposit": "Security%20deposit:",
+				"summary_damage_excess": "Damage%20excess:",
+				"summary_total_tax": "Total",
+				"summary_rental_days_type_left": "Rental%20period",
+				"summary_rental_days_type_right": "days",
+			},
+			license: true,
+			driverForm: {
+				main_fields: [
+					[
+						{
+							name: "first_name",
+							type: "text",
+							placeholder: "First Name",
+							required: true
+						},
+						{
+							name: "last_name",
+							type: "text",
+							placeholder: "Second Name",
+							required: true
+						}
+					],
+					[
+						{
+							name: "email",
+							type: "email",
+							placeholder: "E-mail",
+							required: true
+						},
+						{
+							name: "phone",
+							type: "tel",
+							placeholder: "Phone number",
+							required: true
+						}
+					],
+					[
+						{
+							name: "country",
+							type: "text",
+							placeholder: "Country",
+							required: false
+						},
+						{
+							name: "city",
+							type: "text",
+							placeholder: "City",
+							required: false
+						}
+					],
+					[
+						{
+							name: "address",
+							type: "text",
+							placeholder: "Address",
+							required: false
+						},
+						{
+							name: "birthday",
+							type: "picker",
+							placeholder: "Date of birthday",
+							required: false
+						}
+					]
+				],
+				license_fields: [
+					[
+						{
+							name: "license_num",
+							type: "text",
+							placeholder: "Document number",
+							required: false
+						}
+					],
+					[
+						{
+							name: "license_from",
+							type: "picker",
+							icon: "calendar",
+							placeholder: "Issue date",
+							required: false
+						},
+						{
+							name: "license_to",
+							type: "picker",
+							icon: "calendar",
+							placeholder: "Exp date",
+							required: false
+						}
+					],
+					[
+						{
+							name: "license_files",
+							type: "file",
+						}
+					]
+				]
+			},
+			return_urls: {
+				param1: "val1",
+				param2: "val2"
+			},
+			payment_page: {
+				order_id: 123,
+				type: "success",
+				content: "<p style=\"font-size: 20px\">RESERVATION: 12445</p><p style=\"font-size: 30px\"><strong>Your order has been confirmed.</strong></p><p style=\"font-size: 20px\">Thank you!</p><p style=\"font-size: 20px\"><a href=\"\" class=\"rs-button\">Manage your booking</a></p>"
+			},
+			price_format: "{currency} {price}",
+		};
+	</script>
+</head>
+
+<body>
+	<noscript>You need to enable JavaScript to run this app.</noscript>
+	<div id="rentsyst_payment"></div>
+	<script src="/static/js/bundle_payment.js"></script>
+	<script>
+		window.addEventListener("load", function () {
+			RentsystPayment.init({
+				container: document.getElementById("rentsyst_payment"),
+				settings: window.installs,
+				onResize: function (width, height) {
+				},
+				onAutoScroll: function (scrollVal) {
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>

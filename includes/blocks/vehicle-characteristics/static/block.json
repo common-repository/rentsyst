@@ -1,0 +1,114 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "rentsyst/vehicle-characteristics",
+  "version": "0.5.0",
+  "title": "Vehicle characteristics",
+  "category": "rentsyst",
+  "icon": "car",
+  "description": "With this block, you can display all characteristics of the vehicle",
+  "supports": {
+	"html": false,
+	"spacing": {
+	  "margin": true,
+	  "padding": true
+	},
+	"typography": {
+	  "fontSize": true,
+	  "lineHeight": true,
+	  "__experimentalFontStyle": true,
+	  "__experimentalFontWeight": true,
+	  "__experimentalLetterSpacing": true,
+	  "__experimentalTextTransform": true,
+	  "__experimentalDefaultControls": {
+		"fontSize": true
+	  }
+	},
+	"color": {
+	  "gradients": true,
+	  "link": true,
+	  "__experimentalDuotone": ".wp-block-post-author__avatar img",
+	  "__experimentalDefaultControls": {
+		"background": true,
+		"text": true
+	  }
+	}
+  },
+  "attributes": {
+	"textAlign": {
+	  "type": "string"
+	},
+	"level": {
+	  "type": "number",
+	  "default": 2
+	},
+	"selectedField": {
+	  "type": "string",
+	  "default": false
+	},
+	"isLink": {
+	  "type": "boolean",
+	  "default": false
+	},
+	"rel": {
+	  "type": "string",
+	  "attribute": "rel",
+	  "default": ""
+	},
+	"linkTarget": {
+	  "type": "string",
+	  "default": "_self"
+	},
+	"optionsSetting": {
+	  "type": "object",
+	  "default": {
+		"limit": 4,
+		"displayIcon": true,
+		"hideTitle": false,
+		"displayType": "list",
+		"activeOptions": [
+			"air_condition",
+			"climate_control",
+			"climate_control_two_zones",
+			"luxury_climate_control",
+			"sunroof",
+			"panoramic_sunroof",
+			"moon_roof",
+			"push_button_start",
+			"proximity_key_entry_system",
+			"rear_parking_sensors",
+			"parking_sensors",
+			"built_in_sat_nav",
+			"mobile_phone_technology",
+			"bluetooth",
+			"usb",
+			"qi_wireless_charging",
+			"audio_ipod",
+			"cruise_control",
+			"adaptive_cruise_control",
+			"apple_carplay",
+			"android_auto",
+			"forward_collision_warning",
+			"lane_departure_warning",
+			"automatic_emergency_braking",
+			"active_parking_assist",
+			"automatic_high_beams",
+			"adaptive_headlights",
+			"camera_360_degree",
+			"rearview_camera",
+			"towing_hook",
+			"towing_bar"
+		]
+	  }
+	}
+  },
+  "textdomain": "rentsyst",
+  "usesContext": [
+	"postId",
+	"postType",
+	"queryId"
+  ],
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

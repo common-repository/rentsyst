@@ -1,0 +1,3 @@
+#: rentsyst.php
+msgid "body_type"
+msgstr "Body type"
